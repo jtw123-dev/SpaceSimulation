@@ -10,12 +10,18 @@ public class CameraSwitch : MonoBehaviour
     [SerializeField] PlayableDirector _director;
     private bool _cameraSwitch;
     [SerializeField]private float _timeToSwitch=5;
+    private GameObject _cameraVolumep;
+
+
+    private void Start()
+    {
+        
+    }
 
     // Update is called once per frame
     void Update()
     {
         _timeToSwitch -= Time.deltaTime;
-
 
         if (Input.GetKeyDown(KeyCode.R) && _cameraSwitch == false)
         {
@@ -48,8 +54,6 @@ public class CameraSwitch : MonoBehaviour
             _timeToSwitch = 5;
             _director.Stop();      
             GameObject.Find("CameraVolume").SetActive(false);        
-        }
-
-       
+        }    
     }       
 }
