@@ -26,9 +26,19 @@ public class ShipControls : MonoBehaviour
 
     private void ShipMovement()
     {
+        if (Input.GetKey(KeyCode.RightShift))
+        {
+            _rotSpeed = 0;
+            transform.Rotate(new Vector3(0, 0, -_horizontal * 0.2f), Space.Self);
+        }
+        else if (Input.GetKeyUp(KeyCode.RightShift))
+        {
+            _rotSpeed = 100;
+        }
+
         _vertical = Input.GetAxis("Vertical");
         _horizontal = Input.GetAxis("Horizontal");
-
+     
         if (Input.GetKeyDown(KeyCode.T))
         {
             _currentSpeed++;
@@ -53,8 +63,9 @@ public class ShipControls : MonoBehaviour
         Vector3 rotateV = new Vector3(_vertical, 0, 0);
         transform.Rotate(rotateV * _rotSpeed * Time.deltaTime);
 
-        transform.Rotate(new Vector3(0, 0, -_horizontal * 0.2f), Space.Self);
 
+        
+        
         transform.position += transform.forward * _currentSpeed * Time.deltaTime;
     }
 }
