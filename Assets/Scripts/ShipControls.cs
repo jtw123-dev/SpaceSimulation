@@ -15,7 +15,7 @@ public class ShipControls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _currentSpeed = 1;
+        _currentSpeed = 20;
     }
 
     // Update is called once per frame
@@ -41,19 +41,19 @@ public class ShipControls : MonoBehaviour
      
         if (Input.GetKeyDown(KeyCode.T))
         {
-            _currentSpeed++;
-            if (_currentSpeed > 4)
+            _currentSpeed+=20;
+            if (_currentSpeed > 100)
             {
-                _currentSpeed = 4;
+                _currentSpeed = 100;
             }
         }//increase speed
 
         if (Input.GetKeyDown(KeyCode.G))
         {
-            _currentSpeed--;
-            if (_currentSpeed < 1)
+            _currentSpeed-=20;
+            if (_currentSpeed < 0)
             {
-                _currentSpeed = 1;
+                _currentSpeed = 0;
             }
         }//decrease speed
 

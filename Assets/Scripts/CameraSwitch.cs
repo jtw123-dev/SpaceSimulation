@@ -11,11 +11,13 @@ public class CameraSwitch : MonoBehaviour
     private bool _cameraSwitch;
     [SerializeField]private float _timeToSwitch=5;
     private GameObject _cameraVolumep;
+    private bool _cutsceneCanStart =true;
 
 
     private void Start()
     {
-        
+        StartCoroutine("WaitToStart");
+        Debug.Log("Hi");
     }
 
     // Update is called once per frame
@@ -38,15 +40,32 @@ public class CameraSwitch : MonoBehaviour
 
 
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
-        {          
-            _timeToSwitch = 5;
-            _director.Stop();
-           GameObject.Find("CameraVolume").SetActive(false);            
+        {
+            if (_cutsceneCanStart == true)
+            {
+                return;
+            }
+            else
+            {
+                _timeToSwitch = 5;
+                _director.Stop();
+                GameObject.Find("CameraVolume").SetActive(false);
+            }
+               
         }     
 
         if (Input.anyKeyDown ==false && _timeToSwitch <= 0  ) 
-        {         
-            _director.Play();        
+        {
+            if (_cutsceneCanStart == true)
+            {
+                return;
+            }
+
+            else
+            {
+                _director.Play();
+            }
+                
         }
        
        else if (Input.anyKeyDown ==true ||Input.anyKey==true)
@@ -56,4 +75,10 @@ public class CameraSwitch : MonoBehaviour
             GameObject.Find("CameraVolume").SetActive(false);        
         }    
     }       
+
+    IEnumerator WaitToStart()
+    {
+        yield return new WaitForSeconds(2);
+        _cutsceneCanStart = false;
+    }
 }
